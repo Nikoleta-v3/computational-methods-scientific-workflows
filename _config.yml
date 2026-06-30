@@ -1,0 +1,52 @@
+name: Nikoleta E. Glynatsi
+author: Nikoleta E. Glynatsi
+description: Research Scientist
+avatar: /images/avatar.png
+url: https://nikoleta-v3.github.io
+baseurl: /computational-methods-scientific-workflows
+
+footer-links:
+  email: nikoleta.glynatsi@riken.jp
+  github: Nikoleta-v3
+  twitter: NikoletaGlyn
+  bluesky: NikoletaGlyn
+
+permalink: /:title/
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+
+sass:
+  style: :expanded
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-relative-links
+
+nav:
+  - title: CompSci
+    url: /
+  - title: Prerequisites
+    url: /prerequisites/
+  - title: Terminal
+    url: /terminal/
+  - title: Git
+    url: /git/
+  - title: GitHub
+    url: /github/
+  - title: Cheat Sheet
+    url: /git_cheatsheet/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - course_description
+  - src
+  - README copy.md
+  - _site
