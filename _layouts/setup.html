@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+<article class="page workshop-page prerequisites-page">
+
+  <div class="entry">
+    {{ content }}
+  </div>
+</article>
+
+<script>
+  const setupSections = document.querySelectorAll('.setup-section');
+
+  document.querySelector('[data-setup-toggle="expand"]').addEventListener('click', () => {
+    setupSections.forEach((section) => {
+      section.open = true;
+    });
+  });
+
+  document.querySelector('[data-setup-toggle="collapse"]').addEventListener('click', () => {
+    setupSections.forEach((section) => {
+      section.open = false;
+    });
+  });
+
+  document.querySelectorAll('.setup-checkbox').forEach((checkbox) => {
+    const key = `setup:${checkbox.dataset.setupItem}`;
+    const oldKey = `prerequisites:${checkbox.dataset.setupItem}`;
+    checkbox.checked = localStorage.getItem(key) === 'true' || localStorage.getItem(oldKey) === 'true';
+
+    checkbox.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+    checkbox.addEventListener('change', () => {
+      localStorage.setItem(key, checkbox.checked);
+    });
+  });
+</script>
