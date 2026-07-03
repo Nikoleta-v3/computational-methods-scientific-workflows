@@ -5,29 +5,26 @@ title: Academic Project Structure
 
 ## 04 Documentation and project organisation
 
-A research repository should help readers understand what the project is, how
-the results were produced, how the work can be reproduced, and where the related
-research outputs can be found.
+A research repository goes hand in hand with a research paper. It should help
+your readers understand how the results were produced and how they can be
+reproduced.
 
-This is slightly different from structuring a software package. A package
-repository is organised around installing and distributing reusable software. An
-academic project repository is usually organised around a specific paper,
-analysis, simulation study, or computational experiment.
+The structure of a research repository is often different from that of a
+software package. This does not mean that a research project cannot produce a
+software package. Rather, the primary goal of a research repository is to make
+the code accessible and explain how readers can reproduce the results—for
+example, how to run the simulations and generate the figures.
 
-This does not mean that a research project can never produce a software
-package. It means that, for now, our main goal is to make the code, data,
-documentation, figures, and the context of the paper understandable to another
-researcher.
-
-GitHub should not be used as an unstructured archive where files are uploaded
-without explanation. GitHub is useful for storing code, documentation,
-instructions, and for supporting collaboration. If the goal is long-term
-archiving, use an archiving service such as Zenodo and link to it from the
-repository.
-
-Large datasets should also be archived or deposited in an appropriate data
-repository. The GitHub README should explain where those data are archived, what
-needs to be downloaded, and where the files should be placed within the project.
+* GitHub should not be used as an unstructured archive where files are simply
+    uploaded without any explanation of how to run the code.
+* GitHub is useful for storing code, documentation, instructions, and
+    supporting collaboration.
+* If the goal is long-term archiving, use an archiving service such as Zenodo
+    instead.
+* Large datasets should also be archived or deposited in an appropriate data
+    repository. The GitHub README should explain where the data are archived,
+    what needs to be downloaded, and where the files should be placed within the
+    project.
 
 ## Example: A research project repository
 
@@ -77,18 +74,6 @@ structure should make the workflow visible.
 The `README.md` is the front door of the project. It should explain enough for a
 new reader to understand what the repository contains and how to begin.
 
-A useful README for an academic project should include:
-
-- the project title
-- a short project description
-- the associated paper or preprint, if available
-- collaborators and contact information
-- instructions for installing dependencies
-- instructions for running the code
-- where input data come from
-- where generated results and figures are written
-- how to cite the project or related paper
-
 For the running example, the README might start like this:
 
 ```markdown
@@ -96,10 +81,6 @@ For the running example, the README might start like this:
 
 This repository contains code for the running example used in the
 Computational Methods for Scientific Workflows workshop.
-
-The project demonstrates a small computational workflow: running a script,
-tracking changes with git, publishing the repository on GitHub, and connecting
-code outputs to figures and documentation.
 ```
 
 ## How to run the code
