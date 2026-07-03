@@ -6,12 +6,12 @@ title: Computational Methods for Scientific Workflows
 Here you can find the materials for the course **Computational Methods for
 Scientific Workflows**.
 
-This course is designed for academic researchers who want to make more
-effective use of the tools that support their code. It is not a general
-programming course. Instead, it focuses on practical research workflows:
-working from the command line, tracking changes with `git`, collaborating
-through GitHub, organising projects, preparing figures and tables, and writing
-reproducible scientific documents.
+This course is designed for academic researchers who use code in their work.
+It is not a general programming course. Instead, it focuses on the tools and
+practices that support computational research: working from the command line,
+tracking changes with `git`, collaborating through GitHub, organising
+projects, creating effective data visualisations, preparing publication-ready
+tables, and writing scientific documents with `LaTeX`.
 
 The course materials are organised around a small research project that evolves
 throughout the course.
@@ -39,15 +39,9 @@ throughout the course.
 
 ## git reference
 
-We use `git` throughout the course to track changes, save checkpoints, and
-share work through GitHub.
-
-<div class="lesson-grid module-topic-grid module-topic-grid-secondary">
-  <a class="lesson-card" href="{{ site.baseurl }}/git_cheatsheet/">
-    <h3>Git cheat sheet</h3>
-    <p>Quick reference for the Git commands used throughout the course.</p>
-  </a>
-</div>
+We use `git` throughout the course to track changes, save checkpoints, and share
+work through GitHub. The [`git` cheat sheet]({{ site.baseurl }}/git_cheatsheet/)
+provides a quick reference for the commands used throughout the course.
 
 ## Feedback and contributions
 
