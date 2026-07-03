@@ -4,14 +4,14 @@ title: Git
 section: Version Control
 ---
 
-### 02 Version control with Git
+### 02 Version control with `git`
 
-### Setting up git
+### Setting up `git`
 
-Initially we need to set up git. 
+Initially we need to set up `git`. 
 
-git keeps track of the entire history of a project. This does not only mean
-keeping track of what was done but also who did it. So we start by telling git
+`git` keeps track of the entire history of a project. This does not only mean
+keeping track of what was done but also who did it. So we start by telling `git`
 who we are by running the following two commands:
 
 ```shell
@@ -23,12 +23,12 @@ $ git config --global user.email "Your Email"
 similar. It just stays with your project.
 
 **Windows** Note that all these commands work on the anaconda prompt but if you
-want to use tab completion you can use the git bash command line specifically
-for git.
+want to use tab completion you can use the `git` bash command line specifically
+for `git`.
 
 
 Moreover, we are going to set [Nano](https://www.nano-editor.org) as the default
-editor for git. For unix you can use the following command:
+editor for `git`:
 
 ```shell
 $ git config --global core.editor "nano"
@@ -36,19 +36,19 @@ $ git config --global core.editor "nano"
 
 We are going to use Nano later in order to write a commit message.
 
-### Initialising a git repository
+### Initialising a `git` repository
 
-In order to demonstrate how version control with git works we are going to use
+In order to demonstrate how version control with `git` works we are going to use
 the `computational_methods_workshop` folder we created before.
 
-We need tell git to start keeping an eye on this repository (folder/project).
+We need tell `git` to start keeping an eye on this repository (folder/project).
 While in the `computational_methods_workshop` directory type:
 
 ```shell
 $ git init
 ```
 
-You should then see a message saying that you have successfully initialized a git repository.
+You should then see a message saying that you have successfully initialized a `git` repository.
 
 ### Staging and committing changes
 
@@ -84,7 +84,7 @@ $ git commit
 
 When doing this, a text editor should open up prompting you to write what is called a commit message. In our case the text editor that opens is Nano. 
 
-For the purposes of using git Nano is more than a sufficient editor, all you need to know how to do is:
+For the purposes of using `git` Nano is more than a sufficient editor, all you need to know how to do is:
 
 ```
 - Write in Nano: just type;
@@ -103,7 +103,7 @@ An empty README file.
 
 save and exit.
 
-git should confirm that you have successfully made your first commit.
+`git` should confirm that you have successfully made your first commit.
 
 **Note** A commit message is made up of 2 main components:
 
@@ -116,7 +116,7 @@ git should confirm that you have successfully made your first commit.
 - The title should be a description in the form of "if this commit is applied `<title of the commit>` will happen". The convention is for this to be rather short and to the point.
 - The description can be as long as needed and should be a helpful explanation of what is happening.
 
-A commit is a snapshot that git makes of your project, you should use this at meaningful steps of the progress of a project.
+A commit is a snapshot that `git` makes of your project, you should use this at meaningful steps of the progress of a project.
 
 ### Ignoring files
 
@@ -128,7 +128,7 @@ $ git status -u
 
 We do not want to keep tract of that files as it not related to our project.
 
-To tell git to ignore these files we will add them to a blank file entitled `.gitignore`.
+To tell `git` to ignore these files we will add them to a blank file entitled `.gitignore`.
 
 Open your editor and open a new file (`File > New file`) and type:
 
@@ -154,7 +154,7 @@ Let's assume that we want to add some information to our `README` file.
 The README file explains the purpose of our project, what users can do with it, and how to use it.
 ```
 
-1. Save your file and confirm that git detects the change in one file.
+1. Save your file and confirm that `git` detects the change in one file.
 
 ```shell
 $ git status
@@ -244,7 +244,7 @@ So currently there is only one branch called main.
 Let's create a new branch named `editing-readme. To do this you need to
 run the following series of commands:
 
-```
+```shell
 $ git branch editing-readme
 $ git checkout editing-readme
 Switched to branch 'editing-readme'
@@ -252,7 +252,7 @@ Switched to branch 'editing-readme'
 
 or just 
 
-```
+```shell
 $ git checkout -b editing-readme
 Switched to a new branch 'editing-readme'
 ```
@@ -262,7 +262,7 @@ Once we are here let's add a few more sentence to our `README` file:
 ```
 The README file explains the purpose of our project, what users can do with it, and how to use it.
 
-We are currently not working on a project but we are developing a tutorial on Git.
+We are currently not working on a project but we are developing a tutorial on git.
 ```
 
 Save and then as before, stage the file, and commit with the following commit

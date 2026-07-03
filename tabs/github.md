@@ -6,22 +6,21 @@ section: Collaboration
 
 ### 03 Collaboration using GitHub
 
-So far, the project is tracked with git, which means you have a local history of
-the changes you have made. However, it only exists on your computer.
+So far, the project is tracked with `git`, which means you have a local history
+of the changes you have made. However, it only exists on your computer. To
+collaborate with others, we need a shared copy of the repository. One common way
+to do this is to use GitHub.
 
-To collaborate with others, we need a shared copy of the repository. One common
-way to do this is to use GitHub.
-
-GitHub is a website that hosts git repositories. It gives you a place to store a
+- GitHub is a website that hosts `git` repositories. It gives you a place to store a
 copy of your repository online, share it with other people, review changes, and
 collaborate through issues and pull requests.
 
-It is not the only service that hosts git repositories, but it is a popular one.
+- It is not the only service that hosts `git` repositories, but it is a popular one.
 Other services include [GitLab](https://about.gitlab.com),
 [Bitbucket](https://bitbucket.org), and [SourceForge](https://sourceforge.net).
 
-GitHub is not a replacement for git. git is the version control tool. GitHub is
-one service that can host git repositories and provide collaboration features
+- GitHub is not a replacement for `git`. `git` is the version control tool. GitHub is
+one service that can host `git` repositories and provide collaboration features
 around them.
 
 In this section, we will publish the running example to GitHub, make a change on
@@ -31,7 +30,7 @@ the local repository.
 ## Starting point
 
 You should already have a local project called `computational_methods_workshop`
-that is tracked with git.
+that is tracked with `git`.
 
 Before connecting it to GitHub, check that your repository is clean:
 
@@ -113,7 +112,7 @@ The `--allow-unrelated-histories` option is needed here because the local
 repository and the GitHub repository were created separately. They each started
 with their own first commit.
 
-git may open your text editor to ask for a merge commit message. The default
+`git` may open your text editor to ask for a merge commit message. The default
 message is fine. Save and close the editor.
 
 After the pull, check that the license file is now present locally:
@@ -267,7 +266,7 @@ You should see your new commit on `implement-source-code`.
 Push the branch:
 
 ```shell
-$ git push -u origin implement-source-code
+$ git push origin implement-source-code
 ```
 
 GitHub now has a copy of your branch as well as `main`.

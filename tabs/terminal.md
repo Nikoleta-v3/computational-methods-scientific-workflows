@@ -5,12 +5,11 @@ title: Introduction to the command line
 
 ### 01 Introduction to command line
 
-Firstly, you need to identify and open your command line interface.
+Firstly, you need to open your command line interface.
 
-We recommend the following:
-
-- Windows: we will choose to use Git bash (which was installed on your machine when you installed Git).
-- nix (another way to describe Mac OS and/or Linux machines): we will use the system terminal.
+- Windows: Git bash (which was installed on your machine when you installed `git`).
+- Unix (another way to describe Mac OS and/or Linux machines): we will use the
+  system terminal.
 
 ### Finding your computer's name.
 
