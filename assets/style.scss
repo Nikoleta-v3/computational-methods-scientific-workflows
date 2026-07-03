@@ -1247,6 +1247,10 @@ Modules - reusable parts of our design
   grid-template-columns: minmax(0, 1fr);
 }
 
+.module-topic-grid-start-three {
+  counter-reset: module-topic 2;
+}
+
 .module-topic-grid .lesson-card {
   background: #fbfbfb;
   border: 1px solid #e8e8e8;
