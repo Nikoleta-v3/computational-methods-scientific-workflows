@@ -31,16 +31,18 @@ plugins:
 nav:
   - title: CompSci
     url: /
-  - title: Prerequisites
-    url: /prerequisites/
-  - title: Terminal
-    url: /terminal/
-  - title: Git
-    url: /git/
-  - title: GitHub
-    url: /github/
-  - title: Cheat Sheet
-    url: /git_cheatsheet/
+  - title: Setup
+    url: /setup/
+  - title: Module one
+    url: /module_one/
+  - title: Module two
+    url: /module_two/
+  - title: Exercise
+    url: /exercise/
+  # - title: GitHub
+  #   url: /github/
+  # - title: Cheat Sheet
+  #   url: /git_cheatsheet/
 
 exclude:
   - Gemfile

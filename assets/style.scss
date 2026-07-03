@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.7;
   margin: 1em 0 15px;
   padding: 0;
-  text-align: left;
+  text-align: center;
 
   @include mobile {
     line-height: 1.4;
@@ -374,11 +374,21 @@ nav {
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
+    padding: 6px 8px;
 
     @include mobile {
       margin: 0 10px;
       color: $blue;
     }
+  }
+
+  a.active {
+    background: #fbfbfb;
+    border: 1px solid #e8e8e8;
+    border-left: 4px solid #2f2f2f;
+    border-radius: 6px;
+    color: $darkerGray;
+    padding-left: 10px;
   }
 }
 
@@ -458,6 +468,17 @@ nav {
   text-align: justify;
 }
 
+.back-to-top {
+  margin: 45px 0 0;
+  text-align: right;
+}
+
+.back-to-top a {
+  border-bottom: 1px solid $lightGray;
+  color: $darkGray;
+  font-size: 15px;
+}
+
 footer {
   padding: 20px 0;
   text-align: center;
@@ -487,7 +508,7 @@ body:after {
 
 .post h1{
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  text-align: left;
+  text-align: center;
   font-weight: bold;
   font-kerning: auto;
   font-feature-settings: "kern","liga","dlig","hlig","cswh";
@@ -496,7 +517,7 @@ body:after {
 
 .page h1{
   font-family: -system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  text-align: left;
+  text-align: center;
   font-weight: bold;
   font-kerning: auto;
   font-feature-settings: "kern","liga","dlig","hlig","cswh";
@@ -1214,6 +1235,61 @@ Modules - reusable parts of our design
   text-align: left;
 }
 
+.module-topic-grid {
+  counter-reset: module-topic;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0 38px;
+}
+
+.module-topic-grid-secondary {
+  counter-reset: module-topic 4;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.module-topic-grid .lesson-card {
+  background: #fbfbfb;
+  border: 1px solid #e8e8e8;
+  border-left: 4px solid #2f2f2f;
+  border-radius: 6px;
+  min-height: 150px;
+  padding: 18px 18px 20px;
+  position: relative;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.module-topic-grid .lesson-card::before {
+  color: #a0a0a0;
+  content: counter(module-topic, decimal-leading-zero);
+  counter-increment: module-topic;
+  display: block;
+  font-family: $helveticaNeue;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.module-topic-grid .lesson-card:hover {
+  border-color: #d4d4d4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.module-topic-grid .lesson-card h3 {
+  font-size: 19px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#main .module-topic-grid .lesson-card p {
+  font-size: 16px;
+  line-height: 1.55;
+  text-align: center;
+}
+
 .lesson-label {
   color: #939aa1;
   letter-spacing: 2px;
@@ -1230,6 +1306,27 @@ Modules - reusable parts of our design
   margin-top: 40px;
 }
 
+.setup-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin: 18px 0 4px;
+}
+
+.setup-controls button {
+  background: #fff;
+  border: 1px solid $lightGray;
+  color: $darkGray;
+  cursor: pointer;
+  font-family: $helveticaNeue;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.setup-controls button:hover {
+  border-color: $gray;
+}
+
 .setup-section {
   border-bottom: 1px solid $lightGray;
   margin: 0;
@@ -1239,13 +1336,27 @@ Modules - reusable parts of our design
 .setup-section summary {
   color: $darkerGray;
   cursor: pointer;
-  font-size: 24px;
-  font-weight: bold;
   line-height: 1.3;
+}
+
+.setup-section summary h2 {
+  display: inline;
+  font-size: 24px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.setup-checkbox {
+  cursor: pointer;
+  height: 16px;
+  margin: 0 8px 0 4px;
+  vertical-align: 2px;
+  width: 16px;
 }
 
 .setup-section summary::marker {
   color: $gray;
+  font-size: 0.62em;
 }
 
 .setup-section > :last-child {
@@ -1257,6 +1368,10 @@ Modules - reusable parts of our design
 }
 
 @media (max-width: 900px) {
+  .module-topic-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   nav {
     clear: both;
     float: none;
