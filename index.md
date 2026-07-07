@@ -43,6 +43,7 @@ We use `git` throughout the course to track changes, save checkpoints, and share
 work through GitHub. The [`git` cheat sheet]({{ site.baseurl }}/git_cheatsheet/)
 provides a quick reference for the commands used throughout the course.
 
+
 ## Feedback and contributions
 
 If you notice a typo, find an error, or have suggestions for improving the

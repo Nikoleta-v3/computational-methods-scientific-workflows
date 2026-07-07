@@ -27,19 +27,10 @@ tips. The dataset includes:
 The dataset is documented here:
 <https://rdrr.io/cran/reshape2/man/tips.html>.
 
-## What makes a figure useful?
+## What makes a figure useful/good?
 
-Before writing code, look at a draft figure and ask:
+![](../images/example_figure.png)
 
-- What is the main message?
-- Is the plot type appropriate for the question?
-- Are the axes and units clear?
-- Are related panels aligned and comparable?
-- Are colours helping, or are they decorative?
-- Could the figure be regenerated if the data changed?
-
-If a figure is hard to read, the problem is not always the data. Often the plot
-type, layout, labels, or colour choices can be improved.
 
 ## Create a plotting script
 
@@ -82,7 +73,6 @@ This helps keep:
 - panel sizes consistent
 - axes aligned
 - fonts consistent
-- labels and panel letters reproducible
 
 Add a subplot layout:
 
@@ -161,7 +151,7 @@ axes["B"].boxplot(
     day_data,
     tick_labels=day_order,
     patch_artist=True,
-    boxprops=dict(facecolor="lightgray", alpha=0.7),
+    boxprops=dict(facecolor="orange", alpha=0.7),
     medianprops=dict(color="black", linewidth=2),
     whiskerprops=dict(color="black"),
     capprops=dict(color="black"),
@@ -180,7 +170,7 @@ axes["C"].boxplot(
     time_data,
     tick_labels=time_order,
     patch_artist=True,
-    boxprops=dict(facecolor="lightgray", alpha=0.7),
+    boxprops=dict(facecolor="orange", alpha=0.7),
     medianprops=dict(color="black", linewidth=2),
     whiskerprops=dict(color="black"),
     capprops=dict(color="black"),
@@ -215,7 +205,7 @@ Useful reasons to use colour include:
 - highlighting one important comparison
 - matching a colour scheme used throughout a paper
 
-For this figure, neutral grey box plots are enough. The figure does not need a
+For this figure, orange box plots are enough. The figure does not need a
 different colour for every day of the week.
 
 ## Add panel labels and final styling
@@ -240,7 +230,6 @@ for letter, key in zip("abc", ["A", "B", "C"]):
         fontweight="bold",
     )
 
-fig.suptitle("Exploratory analysis of the tips dataset", y=1.02)
 fig.savefig("figures/tips_summary.pdf", bbox_inches="tight")
 fig.savefig("figures/tips_summary.png", dpi=300, bbox_inches="tight")
 ```
@@ -314,7 +303,7 @@ axes["B"].boxplot(
     day_data,
     tick_labels=day_order,
     patch_artist=True,
-    boxprops=dict(facecolor="lightgray", alpha=0.7),
+    boxprops=dict(facecolor="orange", alpha=0.7),
     medianprops=dict(color="black", linewidth=2),
     whiskerprops=dict(color="black"),
     capprops=dict(color="black"),
@@ -333,7 +322,7 @@ axes["C"].boxplot(
     time_data,
     tick_labels=time_order,
     patch_artist=True,
-    boxprops=dict(facecolor="lightgray", alpha=0.7),
+    boxprops=dict(facecolor="orange", alpha=0.7),
     medianprops=dict(color="black", linewidth=2),
     whiskerprops=dict(color="black"),
     capprops=dict(color="black"),
@@ -365,7 +354,6 @@ for letter, key in zip("abc", ["A", "B", "C"]):
         fontweight="bold",
     )
 
-fig.suptitle("Exploratory analysis of the tips dataset", y=1.02)
 fig.savefig("figures/tips_summary.pdf", bbox_inches="tight")
 fig.savefig("figures/tips_summary.png", dpi=300, bbox_inches="tight")
 ```
@@ -426,34 +414,157 @@ Commit the change:
 git commit -m "Add tips summary figure"
 ```
 
-## Why one figure with multiple panels?
+## Colour example
 
-A multi-panel figure can tell a more complete story than several disconnected
-plots.
+The same figure can also be used to show how colour choices affect the visual
+message. Use colour consistently: here, tip percentage panels use orange and
+total bill panels use blue.
 
-It can help:
+```python
+fig, axes = plt.subplot_mosaic(
+    """
+    ABC
+    ADE
+    """,
+    figsize=(13.5, 4.5),
+    sharex=False,
+    sharey=False,
+    gridspec_kw={
+        "hspace": 0.5,
+        "wspace": 0.3,
+        "height_ratios": [1, 1],
+        "width_ratios": [1, 0.7, 0.7],
+    },
+)
 
-- keep related results together
-- make comparisons easier
-- reduce repeated captions and labels
-- keep style, sizing, and fonts consistent
-- make the figure easier to update when the data change
+slope, intercept = np.polyfit(tips["total_bill"], tips["tip"], 1)
 
-Not every result needs a multi-panel figure. Sometimes one clear plot is the
-best choice. The point is to choose the structure that best communicates the
-result.
+x = np.linspace(tips["total_bill"].min(), tips["total_bill"].max(), 100)
+y = slope * x + intercept
 
-## Checklist for publication-ready plots
+axes["A"].scatter(
+    tips["total_bill"],
+    tips["tip"],
+    label="Observations",
+    alpha=0.7,
+    color="tab:green",
+)
 
-Before using a figure in a report or paper, check:
+axes["A"].plot(
+    x,
+    y,
+    color="black",
+    linewidth=2,
+    label=rf"Linear fit: $y = {slope:.3f}x + {intercept:.3f}$",
+)
 
-- Are the axes labelled?
-- Are units included?
-- Is the plot type appropriate?
-- Are related panels on comparable scales?
-- Are colours used consistently and deliberately?
-- Can the figure be regenerated by running a script?
-- Is the output saved in an appropriate format?
+axes["A"].legend(frameon=False)
+axes["A"].set_xlabel("Total bill ($)")
+axes["A"].set_ylabel("Tip ($)")
 
-Good figures are not just decorative. They are part of the evidence trail of
-the research workflow.
+day_order = ["Thur", "Fri", "Sat", "Sun"]
+day_tip_data = [
+    tips.loc[tips["day"] == day, "tip_percentage"]
+    for day in day_order
+]
+
+axes["B"].boxplot(
+    day_tip_data,
+    tick_labels=day_order,
+    patch_artist=True,
+    boxprops=dict(facecolor="orange", alpha=0.7),
+    medianprops=dict(color="black", linewidth=2),
+    whiskerprops=dict(color="black"),
+    capprops=dict(color="black"),
+)
+
+axes["B"].set_xlabel("Day")
+axes["B"].set_ylabel("Tip percentage")
+
+time_order = ["Lunch", "Dinner"]
+time_tip_data = [
+    tips.loc[tips["time"] == meal, "tip_percentage"]
+    for meal in time_order
+]
+
+axes["C"].boxplot(
+    time_tip_data,
+    tick_labels=time_order,
+    patch_artist=True,
+    boxprops=dict(facecolor="orange", alpha=0.7),
+    medianprops=dict(color="black", linewidth=2),
+    whiskerprops=dict(color="black"),
+    capprops=dict(color="black"),
+)
+
+axes["C"].set_xlabel("Time")
+axes["C"].set_ylabel("Tip percentage")
+
+ymax = max(
+    tips["tip_percentage"].max(),
+    axes["B"].get_ylim()[1],
+    axes["C"].get_ylim()[1],
+)
+
+axes["B"].set_ylim(0, ymax * 1.05)
+axes["C"].set_ylim(0, ymax * 1.05)
+
+day_bill_data = [
+    tips.loc[tips["day"] == day, "total_bill"]
+    for day in day_order
+]
+
+axes["D"].boxplot(
+    day_bill_data,
+    tick_labels=day_order,
+    patch_artist=True,
+    boxprops=dict(facecolor="tab:blue", alpha=0.7),
+    medianprops=dict(color="black", linewidth=2),
+    whiskerprops=dict(color="black"),
+    capprops=dict(color="black"),
+)
+
+axes["D"].set_xlabel("Day")
+axes["D"].set_ylabel("Total bill ($)")
+
+time_bill_data = [
+    tips.loc[tips["time"] == meal, "total_bill"]
+    for meal in time_order
+]
+
+axes["E"].boxplot(
+    time_bill_data,
+    tick_labels=time_order,
+    patch_artist=True,
+    boxprops=dict(facecolor="tab:blue", alpha=0.7),
+    medianprops=dict(color="black", linewidth=2),
+    whiskerprops=dict(color="black"),
+    capprops=dict(color="black"),
+)
+
+axes["E"].set_xlabel("Time")
+axes["E"].set_ylabel("Total bill ($)")
+
+ymax = max(
+    tips["total_bill"].max(),
+    axes["D"].get_ylim()[1],
+    axes["E"].get_ylim()[1],
+)
+
+axes["D"].set_ylim(0, ymax * 1.05)
+axes["E"].set_ylim(0, ymax * 1.05)
+
+for ax in axes.values():
+    sns.despine(ax=ax)
+
+for letter, key in zip("abcde", ["A", "B", "C", "D", "E"]):
+    ax = axes[key]
+    bbox = ax.get_position()
+    fig.text(
+        bbox.x0 - 0.04,
+        bbox.y1 + 0.01,
+        letter,
+        fontsize=16,
+        fontweight="bold",
+    )
+```

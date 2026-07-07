@@ -15,8 +15,8 @@ LaTeX is useful for this because it keeps the document in plain text. That
 makes it easier to track changes with git, review edits, reuse figures and
 tables, and manage references.
 
-In this section, we will create a small LaTeX document with sections, a figure,
-a generated table, and references.
+In this section, we will create a small LaTeX document with sections, a figure
+and a table.
 
 ## Why not only use Overleaf?
 
@@ -28,11 +28,9 @@ workflow too.
 
 A local workflow makes it easier to:
 
-- keep the manuscript in the same repository as the analysis code
 - track changes with git
 - include generated figures and tables directly from project folders
 - work offline
-- compile the same document in a reproducible environment
 - review changes through GitHub pull requests
 
 The point is not that Overleaf is wrong. The point is that the writing process
@@ -144,6 +142,17 @@ breaks are not too long.
 A practical habit is to keep LaTeX source lines reasonably short. Around 80
 characters is a useful guide, not a strict rule.
 
+In VS Code, add a ruler at 80 characters so you can see when a line is getting
+long:
+
+```json
+"editor.rulers": [80]
+```
+
+The ruler is only a visual guide in the editor. It does not change the PDF and
+it does not force line breaks. Use it to decide where to break long sentences
+in the source file.
+
 This is harder to review:
 
 ```latex
@@ -178,10 +187,23 @@ then it can be included in the manuscript with:
 \begin{figure}
   \centering
   \includegraphics[width=0.85\linewidth]{../figures/tips_summary.png}
-  \caption{Relationship between bill total, tip amount, and party size.}
+  \caption{\textbf{Tips increase with total bill size.}
+  (a) Relationship between total bill and tip amount.
+  (b) Tip percentage by day.
+  (c) Tip percentage by time of day.}
   \label{fig:tips-summary}
 \end{figure}
 ```
+
+For multi-panel figures, a useful caption structure is a short main message in
+bold, followed by one sentence or phrase for each panel label. The panel labels
+in the caption should match the labels in the figure, such as `(a)`, `(b)`, and
+`(c)`.
+
+Caption style and length depend on the journal. Some journals expect short
+captions, while others expect enough detail that the figure can be understood
+without reading the full results section. Always check the author guidelines
+before submission.
 
 Refer to the figure using the label:
 
@@ -232,101 +254,22 @@ git diff --staged
 git commit -m "Include generated table in manuscript"
 ```
 
-## Add references
+## Reviewing changes via GitHub and pull requests
 
-References should also be managed as structured data. Create:
+Today we have worked directly on the `main` branch. Make sure all of your changes have been pushed to GitHub and that everything is up to date.
 
-```text
-paper/references.bib
-```
+Now, let’s assume that we want to make a small change to the manuscript. We will create a new branch for this change, commit our work, push it to GitHub, and open a pull request.
 
-Add a small example entry:
+See what it looks like! You can use the review function to leave comments, suggestions, and have a discussion about the proposed changes.
 
-```bibtex
-@article{example2026,
-  title = {An Example Scientific Paper},
-  author = {Example, Alice and Researcher, Bob},
-  journal = {Journal of Reproducible Examples},
-  year = {2026}
-}
-```
 
-Then update `paper/main.tex`:
+## Project structure
 
-```latex
-Scientific workflows should make results easier to reproduce
-\cite{example2026}.
+In this workshop, the manuscript, scripts, figures, and tables are all stored in a single repository because the example project is small.
 
-\bibliographystyle{plain}
-\bibliography{references}
-```
+For a real research project, however, it is often better to use two repositories.
 
-If the bibliography does not appear on the first compile, run the LaTeX build
-again. Bibliographies often require more than one pass. A manual build might
-look like:
+* The analysis repository contains the code, data-processing scripts, and other computational materials. This repository should generally be made public to support reproducibility.
+* The paper repository contains the manuscript and related writing. It often remains private.
 
-```shell
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
-
-Commit the bibliography and manuscript update:
-
-```shell
-git status
-git add paper/main.tex paper/references.bib
-git diff --staged
-git commit -m "Add manuscript references"
-```
-
-## A simple project layout
-
-A small project might look like this:
-
-```text
-project/
-+-- paper/
-|   +-- main.tex
-|   +-- references.bib
-+-- figures/
-|   +-- tips_summary.png
-+-- tables/
-|   +-- tips_by_party_size.tex
-+-- scripts/
-|   +-- plot_tips.py
-|   +-- table_tips.py
-```
-
-This layout keeps the manuscript close to the outputs it uses, while still
-making it clear which files are source documents and which files are generated.
-
-## Checklist for scientific writing with LaTeX
-
-Before sharing a draft, check:
-
-- Is the manuscript tracked with git?
-- Are generated figures stored in a predictable folder?
-- Are generated tables included from files rather than copied by hand?
-- Are figures and tables referenced with labels?
-- Are references stored in a `.bib` file?
-- Are source lines short enough to review comfortably?
-- Can the document be rebuilt by someone else?
-
-## Summary
-
-In this section, we used LaTeX as part of a reproducible writing workflow.
-
-We:
-
-- created a small manuscript
-- tracked it with git
-- discussed why plain-text writing is useful for review
-- added a figure using `\includegraphics`
-- included a generated table using `\input`
-- added references through a bibliography file
-
-The main lesson is that writing is part of the research workflow. A manuscript
-should not be disconnected from the code, figures, tables, and data that support
-it.
+Another advantage of this workflow is that we can maintain a stable main branch containing the current draft of the paper. Whenever we are ready to submit to a journal, we create a branch from this main draft. If the paper is rejected, we return to the main branch, incorporate the reviewers’ comments, and then create a new submission branch for the next journal. This keeps the history of each submission separate while preserving a clean, up-to-date main version of the manuscript.
