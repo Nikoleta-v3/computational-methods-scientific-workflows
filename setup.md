@@ -191,6 +191,50 @@ Run:
 pdflatex --version
 ```
 
+```shell
+{
+   "latex-workshop.latex.tools": [
+       {
+           "name": "pdflatex",
+           "command": "pdflatex",
+           "args": [
+               "-synctex=1",
+               "-interaction=nonstopmode",
+               "-file-line-error",
+               "%DOC%"
+           ]
+       },
+       {
+           "name": "bibtex",
+           "command": "bibtex",
+           "args": [
+               "%DOCFILE%"
+           ]
+       }
+   ],
+
+   "latex-workshop.latex.recipes": [
+       {
+           "name": "pdflatex",
+           "tools": [
+               "pdflatex"
+           ]
+       },
+       {
+           "name": "pdflatex + bibtex",
+           "tools": [
+               "pdflatex",
+               "bibtex",
+               "pdflatex",
+               "pdflatex"
+           ]
+       }
+   ],
+
+   "latex-workshop.latex.recipe.default": "pdflatex"
+}
+```
+
 </details>
 
 
